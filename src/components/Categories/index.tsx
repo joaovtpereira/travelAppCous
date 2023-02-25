@@ -42,6 +42,7 @@ function Categories({
 Categories.defaultProps = {
   categories: [],
   selectedCategory: 0,
+  onCategoryPress: () => {},
 };
 
 export default React.memo(Categories);
