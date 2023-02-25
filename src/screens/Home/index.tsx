@@ -1,12 +1,19 @@
-import React, {useState} from 'react';
-import {View, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, SafeAreaView, ScrollView} from 'react-native';
 import AttractionCard from '../../components/AttractionCard';
 import Categories from '../../components/Categories';
 import Title from '../../components/Title';
 import styles from './styles';
 
+import jsonData from '../../data/attractions.json';
+
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    setData(jsonData);
+  }, []);
 
   return (
     <SafeAreaView>
@@ -30,19 +37,17 @@ function Home() {
           ]}
         />
 
-        <View style={styles.row}>
-          <AttractionCard
-            imageSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-ac6QK6qIl_UQU5nk783pNxFZIpKoAFDphw&usqp=CAU"
-            title={'Montanha Russa'}
-            subtitle="Uberlandia"
-          />
-
-          <AttractionCard
-            imageSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-ac6QK6qIl_UQU5nk783pNxFZIpKoAFDphw&usqp=CAU"
-            title={'Montanha Russa'}
-            subtitle="São paulo"
-          />
-        </View>
+        <ScrollView contentContainerStyle={styles.row}>
+          {data?.map((item: any, index: number) => (
+            <AttractionCard
+              key={item?.id}
+              style={index % 2 === 0 ? {marginRight: 12} : {}}
+              imageSrc={item?.images?.length ? item?.images[0] : null}
+              title={item?.name}
+              subtitle={item?.city}
+            />
+          ))}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
