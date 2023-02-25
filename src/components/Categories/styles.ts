@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   itemContainer: {
-    marginVertical: 14,
+    marginBottom: 14,
     marginRight: 17,
   },
   sectedItemContainer: {

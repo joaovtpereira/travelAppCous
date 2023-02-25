@@ -18,7 +18,7 @@ function Categories({
     <FlatList
       horizontal
       data={categories}
-      style={{marginRight: -32}}
+      keyExtractor={item => String(item)}
       showsHorizontalScrollIndicator={false}
       renderItem={({item, index}) => {
         const selected = selectedCategory === index;
@@ -28,6 +28,7 @@ function Categories({
             style={[
               styles.itemContainer,
               selected ? styles.sectedItemContainer : {},
+              index === 0 ? {marginLeft: 32} : {},
             ]}>
             <Text style={[styles.item, selected ? styles.sectedItem : {}]}>
               {item}
