@@ -5,8 +5,8 @@ import styles from './styles';
 
 type CategoriesProps = {
   categories: String[];
-  selectedCategory: number;
-  onCategoryPress(index: number): void;
+  selectedCategory: String;
+  onCategoryPress(index: string): void;
 };
 
 function Categories({
@@ -20,11 +20,11 @@ function Categories({
       data={categories}
       keyExtractor={item => String(item)}
       showsHorizontalScrollIndicator={false}
-      renderItem={({item, index}) => {
-        const selected = selectedCategory === index;
+      renderItem={({item, index}: any) => {
+        const selected = selectedCategory === item;
         return (
           <TouchableOpacity
-            onPress={() => onCategoryPress(index)}
+            onPress={() => onCategoryPress(item)}
             style={[
               styles.itemContainer,
               selected ? styles.sectedItemContainer : {},
@@ -42,7 +42,7 @@ function Categories({
 
 Categories.defaultProps = {
   categories: [],
-  selectedCategory: 0,
+  selectedCategory: 'All',
   onCategoryPress: () => {},
 };
 
