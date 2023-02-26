@@ -3,10 +3,12 @@ import {SafeAreaView, Text} from 'react-native';
 
 import styles from './styles';
 
-function AttractionDetails() {
+function AttractionDetails({route}: any) {
+  const {item} = route?.params || {};
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text>AttractionDetails</Text>
+      <Text>{item?.name}</Text>
     </SafeAreaView>
   );
 }

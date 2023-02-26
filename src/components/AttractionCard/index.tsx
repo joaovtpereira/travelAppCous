@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Image, Text, StyleProp, ViewStyle} from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  StyleProp,
+  ViewStyle,
+  TouchableOpacity,
+} from 'react-native';
 
 import styles from './styles';
 
@@ -8,6 +15,7 @@ type AttractionCardProps = {
   imageSrc: string;
   subtitle: String;
   style: StyleProp<ViewStyle>;
+  onPress(): void;
 };
 
 function AttractionCard({
@@ -15,9 +23,10 @@ function AttractionCard({
   imageSrc,
   subtitle,
   style,
+  onPress,
 }: AttractionCardProps) {
   return (
-    <View style={[styles.card, style]}>
+    <TouchableOpacity onPress={onPress} style={[styles.card, style]}>
       <Image style={styles.image} source={{uri: imageSrc}} />
       <Text style={styles.title}>{title}</Text>
       <View style={styles.row}>
@@ -28,7 +37,7 @@ function AttractionCard({
 
         <Text style={styles.subtitle}>{subtitle}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -37,6 +46,7 @@ AttractionCard.defaultProps = {
   imageSrc: '',
   subtitle: '',
   style: {},
+  onPress: () => {},
 };
 
 export default React.memo(AttractionCard);

@@ -7,10 +7,13 @@ import styles from './styles';
 
 import jsonData from '../../data/attractions.json';
 import categories from '../../data/categories.json';
+import {useNavigation} from '@react-navigation/native';
 
 const ALL = 'All';
 
 function Home() {
+  const navigation = useNavigation();
+
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [data, setData] = useState<any>([]);
 
@@ -58,6 +61,9 @@ function Home() {
         keyExtractor={item => String(item?.id)}
         renderItem={({item, index}) => (
           <AttractionCard
+            onPress={() =>
+              navigation.navigate('AttractionDetails' as never, {item} as never)
+            }
             style={
               index % 2 === 0
                 ? {marginRight: 12, marginLeft: 32}
