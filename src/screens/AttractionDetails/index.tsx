@@ -13,9 +13,15 @@ import styles from './styles';
 function AttractionDetails({route, navigation}: any) {
   const {item} = route?.params || {};
   const mainImage = item?.images?.length ? item?.images[0] : null;
+  const slicedImages = item?.images?.length ? item?.images?.slice(0, 5) : [];
+  const diffImages = item?.images?.length - slicedImages?.length;
 
   const onBack = () => {
     navigation.goBack();
+  };
+
+  const onGalleryNavigate = () => {
+    navigation.navigate('Gallery', {images: item?.images});
   };
 
   return (
@@ -39,17 +45,18 @@ function AttractionDetails({route, navigation}: any) {
           </Pressable>
         </View>
 
-        <View style={styles.footer}>
-          {item?.images?.length
-            ? item?.images?.map((image: any) => (
-                <Image
-                  key={image}
-                  source={{uri: image}}
-                  style={styles.miniImage}
-                />
-              ))
-            : null}
-        </View>
+        <Pressable onPress={onGalleryNavigate} style={styles.footer}>
+          {slicedImages?.map((image: any, index: number) => (
+            <View key={image}>
+              <Image source={{uri: image}} style={styles.miniImage} />
+              {diffImages > 0 && index === slicedImages?.length - 1 ? (
+                <View style={styles.moreImagesContainer}>
+                  <Text style={styles.moreImages}>{`+${diffImages}`}</Text>
+                </View>
+              ) : null}
+            </View>
+          ))}
+        </Pressable>
       </ImageBackground>
 
       <Text>{item?.name}</Text>
