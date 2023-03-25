@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import Title from '../../components/Title';
 
 import styles from './styles';
 
@@ -23,6 +24,8 @@ function AttractionDetails({route, navigation}: any) {
   const onGalleryNavigate = () => {
     navigation.navigate('Gallery', {images: item?.images});
   };
+
+  console.log({item});
 
   return (
     <SafeAreaView style={styles.container}>
@@ -59,7 +62,13 @@ function AttractionDetails({route, navigation}: any) {
         </Pressable>
       </ImageBackground>
 
-      <Text>{item?.name}</Text>
+      <View style={styles.headerContainer}>
+        <View>
+          <Title style={styles.title} text={item?.name} />
+          <Text style={styles.city}>{item?.city}</Text>
+        </View>
+        <Title style={styles.title} text={item?.entry_price} />
+      </View>
     </SafeAreaView>
   );
 }
