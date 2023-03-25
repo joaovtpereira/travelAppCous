@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import InfoCard from '../../components/InfoCard';
 import Title from '../../components/Title';
 
 import styles from './styles';
@@ -24,8 +25,6 @@ function AttractionDetails({route, navigation}: any) {
   const onGalleryNavigate = () => {
     navigation.navigate('Gallery', {images: item?.images});
   };
-
-  console.log({item});
 
   return (
     <SafeAreaView style={styles.container}>
@@ -69,6 +68,15 @@ function AttractionDetails({route, navigation}: any) {
         </View>
         <Title style={styles.title} text={item?.entry_price} />
       </View>
+
+      <InfoCard
+        text={item.address}
+        icon={require('../../assets/location_circle.png')}
+      />
+      <InfoCard
+        text={`OPEN\n${item?.opening_time} - ${item?.closing_time}`}
+        icon={require('../../assets/schedule.png')}
+      />
     </SafeAreaView>
   );
 }
