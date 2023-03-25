@@ -76,6 +76,7 @@ function AttractionDetails({route, navigation}: any) {
       <InfoCard
         text={`OPEN\n${item?.opening_time} - ${item?.closing_time}`}
         icon={require('../../assets/schedule.png')}
+        style={{marginTop: 8}}
       />
     </SafeAreaView>
   );

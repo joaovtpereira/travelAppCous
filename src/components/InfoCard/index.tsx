@@ -11,9 +11,9 @@ type InfoCardProps = {
 
 function InfoCard({icon, text, style}: InfoCardProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Image source={icon} style={styles.icon} />
-      <Text style={[styles.title, style]}>{text}</Text>
+      <Text style={styles.title}>{text}</Text>
     </View>
   );
 }
@@ -21,6 +21,7 @@ function InfoCard({icon, text, style}: InfoCardProps) {
 InfoCard.defaultProps = {
   text: 'DefaultProps',
   style: {},
+  icon: '',
 };
 
 export default React.memo(InfoCard);
